@@ -17,7 +17,13 @@
             --text-primary: #1A202C; /* Dark charcoal for perfect readability */
             --text-secondary: #4A5568; /* Medium gray for descriptions */
             --border-light: #E2E8F0;
-            --radius: 12px;
+            --radius: 5px; /* Flush, clean, industrial rounding */
+
+            /* ===== BD ENGINEERS CLOUDINARY ASSETS ===== */
+            --img-tea:    url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794828569/KTDA-Tea-Factory-Inside_u76a28.jpg');
+            --img-axial:  url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg');
+            --img-1:      url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg');
+            --img-3:      url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg');
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,7 +47,7 @@
             align-items: center;
             gap: 10px;
             padding: 14px 32px;
-            border-radius: 5px;
+            border-radius: var(--radius);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
@@ -106,7 +112,7 @@
             width: 38px;
             height: 38px;
             background: var(--navy);
-            border-radius: 8px;
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -182,13 +188,17 @@
         .thumbnail {
             width: 80px;
             height: 80px;
-            border-radius: 8px;
+            border-radius: var(--radius);
             border: 2px solid transparent;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.2s;
+            opacity: 0.7;
         }
-        .thumbnail.active, .thumbnail:hover { border-color: var(--gold); }
+        .thumbnail.active, .thumbnail:hover { 
+            border-color: var(--gold); 
+            opacity: 1;
+        }
         .thumbnail img { width: 100%; height: 100%; object-fit: cover; }
 
         /* Product Info */
@@ -217,6 +227,12 @@
         }
 
         /* Specifications Table */
+        .specs-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
         .specs-table {
             width: 100%;
             border-collapse: collapse;
@@ -251,9 +267,10 @@
             flex-direction: column;
             gap: 16px;
         }
-        .cta-box h4 { font-size: 1.1rem; margin-bottom: 4px; }
-        .cta-box p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; }
-        .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .cta-box h4 { font-size: 1.1rem; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+        .cta-box h4 i { color: var(--gold); }
+        .cta-box p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.6; }
+        .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
 
         /* --- Related Products --- */
         .related-section {
@@ -309,7 +326,9 @@
             font-weight: 600;
             font-size: 0.85rem;
             margin-top: 12px;
+            transition: gap 0.3s;
         }
+        .related-card:hover .link-text { gap: 10px; }
 
         /* --- Footer (Grounding element) --- */
         footer { 
@@ -332,6 +351,19 @@
         }
         .footer-col a:hover { color: var(--gold); transform: translateX(4px); }
         .footer-col a i { width: 20px; color: var(--gold); font-size: 0.85rem; }
+        
+        .social-links { display: flex; gap: 12px; margin-top: 20px; }
+        .social-links a {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: translateY(-4px); }
+        .social-links a i { width: auto; color: inherit; font-size: 1rem; }
+        
         .footer-bottom { 
             border-top: 1px solid rgba(255,255,255,0.1); 
             padding-top: 24px; text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.4);
@@ -343,7 +375,7 @@
             .product-detail-grid { grid-template-columns: 1fr; gap: 40px; }
             .product-gallery { position: static; }
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-            .nav-links { display: none; } /* Simplified for mockup */
+            .nav-links { display: none; }
         }
         @media (max-width: 600px) {
             .footer-grid { grid-template-columns: 1fr; }
@@ -362,25 +394,28 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="/" class="logo">
+        <a href="index.html" class="logo">
             <div class="logo-icon"><i class="fas fa-cog"></i></div>
             BD ENGINEERS
         </a>
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/industries">Industries</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="index.html#industries">Industries</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
         </ul>
-        <a href="/contact" class="btn btn-gold" style="padding: 10px 24px; font-size: 0.85rem;">Get Quote</a>
+        <a href="index.html#contact" class="btn btn-gold" style="padding: 10px 24px; font-size: 0.85rem;">Get Quote</a>
     </nav>
 
     <!-- Page Header -->
     <div class="page-header">
         <div class="container">
             <div class="breadcrumb">
-                <a href="/">Home</a> / <a href="/products">Products</a> / <a href="/products/power-transmission">Power Transmission</a> / <span>Pulleys</span>
+                <a href="index.html">Home</a> <i class="fas fa-chevron-right" style="font-size:0.6rem; margin-top:3px;"></i> 
+                <a href="products.html">Products</a> <i class="fas fa-chevron-right" style="font-size:0.6rem; margin-top:3px;"></i> 
+                <a href="products.html#power">Power Transmission</a> <i class="fas fa-chevron-right" style="font-size:0.6rem; margin-top:3px;"></i> 
+                <span>Pulleys</span>
             </div>
             <h1>Transmission 'V' Pulleys</h1>
             <p>High-grade cast iron pulleys in taper and pilot bore configurations, conforming to ISO 4183 standards for maximum durability and performance.</p>
@@ -395,17 +430,17 @@
                 <!-- Left: Image Gallery -->
                 <div class="product-gallery">
                     <div class="main-image">
-                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80" alt="Transmission V Pulley">
+                        <img id="mainImage" src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Transmission V Pulley">
                     </div>
                     <div class="thumbnail-row">
-                        <div class="thumbnail active">
-                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=200&q=80" alt="Pulley View 1">
+                        <div class="thumbnail active" onclick="changeImage(this, 'https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg')">
+                            <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Pulley View 1">
                         </div>
-                        <div class="thumbnail">
-                            <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=200&q=80" alt="Pulley View 2">
+                        <div class="thumbnail" onclick="changeImage(this, 'https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg')">
+                            <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg" alt="Pulley View 2">
                         </div>
-                        <div class="thumbnail">
-                            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=200&q=80" alt="Pulley View 3">
+                        <div class="thumbnail" onclick="changeImage(this, 'https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg')">
+                            <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg" alt="Pulley View 3">
                         </div>
                     </div>
                 </div>
@@ -425,34 +460,37 @@
                         <li><i class="fas fa-check-circle"></i> Custom and special pulley configurations available on request</li>
                     </ul>
 
-                    <table class="specs-table">
-                        <tr>
-                            <th>Material</th>
-                            <td>Phosphate GG25 Grade Cast Iron</td>
-                        </tr>
-                        <tr>
-                            <th>Configuration</th>
-                            <td>Taper Bore & Pilot Bore</td>
-                        </tr>
-                        <tr>
-                            <th>Belt Sections</th>
-                            <td>A, B, C (Custom sizes available)</td>
-                        </tr>
-                        <tr>
-                            <th>Standard</th>
-                            <td>ISO 4183 Compliant</td>
-                        </tr>
-                        <tr>
-                            <th>Application</th>
-                            <td>Conveyor systems, agricultural machinery, industrial drives</td>
-                        </tr>
-                    </table>
+                    <div class="specs-section">
+                        <h3><i class="fas fa-ruler-combined" style="margin-right: 8px; color: var(--gold);"></i>Technical Specifications</h3>
+                        <table class="specs-table">
+                            <tr>
+                                <th>Material</th>
+                                <td>Phosphate GG25 Grade Cast Iron</td>
+                            </tr>
+                            <tr>
+                                <th>Configuration</th>
+                                <td>Taper Bore & Pilot Bore</td>
+                            </tr>
+                            <tr>
+                                <th>Belt Sections</th>
+                                <td>A, B, C (Custom sizes available)</td>
+                            </tr>
+                            <tr>
+                                <th>Standard</th>
+                                <td>ISO 4183 Compliant</td>
+                            </tr>
+                            <tr>
+                                <th>Application</th>
+                                <td>Conveyor systems, agricultural machinery, industrial drives</td>
+                            </tr>
+                        </table>
+                    </div>
 
                     <div class="cta-box">
-                        <h4>Need this for your project?</h4>
+                        <h4><i class="fas fa-file-invoice"></i> Request a Quotation</h4>
                         <p>Our technical team can help you select the right pulley configuration and provide a competitive quotation within 24 hours.</p>
                         <div class="cta-actions">
-                            <a href="/contact" class="btn btn-gold">Request Quotation <i class="fas fa-file-invoice"></i></a>
+                            <a href="index.html#contact" class="btn btn-gold">Request Quotation <i class="fas fa-arrow-right"></i></a>
                             <a href="https://wa.me/254701018405" class="btn btn-outline"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
                         </div>
                     </div>
@@ -472,7 +510,7 @@
             <div class="related-grid">
                 <a href="#" class="related-card">
                     <div class="related-card-img">
-                        <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&w=600&q=80" alt="Taper Lock Bushes">
+                        <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Taper Lock Bushes">
                     </div>
                     <div class="related-card-body">
                         <h3>Taper Lock Bushes</h3>
@@ -482,7 +520,7 @@
                 </a>
                 <a href="#" class="related-card">
                     <div class="related-card-img">
-                        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80" alt="Industrial Chains">
+                        <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Industrial Chains">
                     </div>
                     <div class="related-card-body">
                         <h3>Transmission Chains</h3>
@@ -492,7 +530,7 @@
                 </a>
                 <a href="#" class="related-card">
                     <div class="related-card-img">
-                        <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=600&q=80" alt="Sprockets">
+                        <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Sprockets">
                     </div>
                     <div class="related-card-body">
                         <h3>Industrial Sprockets</h3>
@@ -502,7 +540,7 @@
                 </a>
                 <a href="#" class="related-card">
                     <div class="related-card-img">
-                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80" alt="Vee Belts">
+                        <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg" alt="Vee Belts">
                     </div>
                     <div class="related-card-body">
                         <h3>Vee Belts</h3>
@@ -521,33 +559,48 @@
                 <div class="footer-col">
                     <h4>BD ENGINEERS LTD</h4>
                     <p>Your trusted partner for industrial machinery, power transmission, and engineering solutions in East Africa. Quality equipment, reliable service, technical expertise.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/254701018405"><i class="fab fa-whatsapp"></i></a>
+                    </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
-                    <a href="/about"><i class="fas fa-chevron-right"></i> About Us</a>
-                    <a href="/products"><i class="fas fa-chevron-right"></i> Products</a>
-                    <a href="/industries"><i class="fas fa-chevron-right"></i> Industries</a>
-                    <a href="/contact"><i class="fas fa-chevron-right"></i> Contact</a>
+                    <a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a>
+                    <a href="products.html"><i class="fas fa-chevron-right"></i> Products</a>
+                    <a href="index.html#industries"><i class="fas fa-chevron-right"></i> Industries</a>
+                    <a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact</a>
                 </div>
                 <div class="footer-col">
                     <h4>Products</h4>
-                    <a href="#"><i class="fas fa-cog"></i> Tea Processing</a>
-                    <a href="#"><i class="fas fa-cog"></i> Power Transmission</a>
-                    <a href="#"><i class="fas fa-cog"></i> Diesel Engines</a>
-                    <a href="#"><i class="fas fa-cog"></i> Solar Products</a>
+                    <a href="products.html#tea"><i class="fas fa-cog"></i> Tea Processing</a>
+                    <a href="pulleys.html"><i class="fas fa-cog"></i> Power Transmission</a>
+                    <a href="products.html#diesel"><i class="fas fa-cog"></i> Diesel Engines</a>
+                    <a href="products.html#solar"><i class="fas fa-cog"></i> Solar Products</a>
                 </div>
                 <div class="footer-col">
                     <h4>Contact Us</h4>
                     <a href="#"><i class="fas fa-map-marker-alt"></i> P.O Box 43138, Nairobi, 00100</a>
                     <a href="tel:+254701018405"><i class="fas fa-phone"></i> +254 701 018405</a>
+                    <a href="tel:+25420552871"><i class="fas fa-phone-alt"></i> +254 20 552871/2</a>
                     <a href="mailto:info@bdengineers.co.ke"><i class="fas fa-envelope"></i> info@bdengineers.co.ke</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2026 BD Engineers Limited. All Rights Reserved.
+                &copy; 2026 BD Engineers Limited. All Rights Reserved. | Designed with precision for industrial excellence.
             </div>
         </div>
     </footer>
 
+    <script>
+        // Simple, clean image gallery switcher
+        function changeImage(thumbnail, src) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            thumbnail.classList.add('active');
+        }
+    </script>
 </body>
 </html>
