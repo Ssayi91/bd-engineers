@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Products | BD Engineers Ltd</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --navy:#172B46; --gold:#D69B32; --gold-light:#FDF6E3;
+  --bg-main:#FAFAF8; --bg-surface:#FFFFFF;
+  --text-primary:#1A202C; --text-secondary:#4A5568;
+  --border-light:#E2E8F0; --radius:5px;
+
+  /* ===== BD ENGINEERS CLOUDINARY ASSETS ===== */
+  --img-tea:    url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794828569/KTDA-Tea-Factory-Inside_u76a28.jpg');
+  --img-axial:  url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg');
+  --img-1:      url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg');
+  --img-3:      url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg');
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;color:var(--text-primary);background:var(--bg-main);font-weight:400;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-weight:600;letter-spacing:-.4px;color:var(--navy)}
+.container{max-width:1200px;margin:0 auto}
+
+/* Small, flush controls */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:var(--radius);text-decoration:none;font-weight:600;font-size:.78rem;transition:all .25s ease;border:none;cursor:pointer}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#c48d2a;transform:translateY(-1px)}
+
+/* Top bar */
+.top-bar{background:var(--navy);color:rgba(255,255,255,.8);font-size:.75rem;padding:8px 8%;display:flex;justify-content:space-between}
+.top-bar i{margin-right:5px;color:var(--gold)}
+
+/* Nav */
+nav{position:sticky;top:0;background:rgba(255,255,255,.97);backdrop-filter:blur(15px);padding:14px 8%;display:flex;justify-content:space-between;align-items:center;z-index:200;border-bottom:1px solid var(--border-light)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;color:var(--navy);text-decoration:none}
+.logo-icon{width:34px;height:34px;background:var(--navy);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.95rem}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+.nav-links>li{position:relative}
+.nav-links a{display:flex;align-items:center;gap:5px;text-decoration:none;color:var(--text-primary);font-size:.85rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links .caret{font-size:.55rem;opacity:.5}
+
+/* Mega menu (kept compact) */
+.mega{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%) translateY(10px);background:var(--navy);border-radius:var(--radius);padding:24px 26px;display:grid;grid-template-columns:170px 1fr 1fr;gap:28px;width:720px;box-shadow:0 20px 50px rgba(0,0,0,.2);opacity:0;visibility:hidden;transition:all .25s ease;border:1px solid rgba(255,255,255,.08)}
+.nav-links>li:hover .mega{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.mega::before{content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%) rotate(45deg);width:14px;height:14px;background:var(--navy);border-left:1px solid rgba(255,255,255,.08);border-top:1px solid rgba(255,255,255,.08)}
+.mega-cats{display:flex;flex-direction:column;gap:2px;border-right:1px solid rgba(255,255,255,.1);padding-right:16px}
+.mega-cats a{color:#fff;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);text-decoration:none}
+.mega-cats a:hover{color:var(--gold)}
+.mega-col{display:flex;flex-direction:column}
+.mega-col a{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.7);font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.3px;text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:all .2s}
+.mega-col a i{font-size:.5rem;color:var(--gold);opacity:.7}
+.mega-col a:hover{color:#fff;padding-left:5px}
+
+/* Page header */
+.page-header{background:var(--bg-surface);padding:32px 8%;border-bottom:1px solid var(--border-light)}
+.breadcrumb{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--text-secondary);margin-bottom:12px}
+.breadcrumb a{color:var(--text-secondary);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb i{font-size:.6rem}
+.breadcrumb span{color:var(--navy);font-weight:600}
+.page-header h1{font-size:1.8rem;margin-bottom:8px}
+.page-header p{color:var(--text-secondary);max-width:600px;font-size:.92rem}
+
+/* Toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:22px}
+.search{display:flex;align-items:center;gap:8px;background:var(--bg-main);border:1px solid var(--border-light);border-radius:var(--radius);padding:8px 12px;min-width:240px}
+.search i{color:var(--text-secondary);font-size:.8rem}
+.search input{border:none;background:transparent;outline:none;font-family:inherit;font-size:.82rem;color:var(--text-primary);width:100%}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:var(--text-secondary);background:var(--bg-main);border:1px solid var(--border-light);border-radius:var(--radius);padding:6px 12px;text-decoration:none;transition:all .2s}
+.pill:hover,.pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* Catalog - Clean & Compact */
+.catalog{padding:40px 8% 60px}
+.cat-block{
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 40px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  padding: 24px;
+}
+.cat-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--section-bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(15px) brightness(1.15);
+  opacity: 0.08;
+  z-index: 0;
+  transform: scale(1.1);
+}
+.cat-block > * { position: relative; z-index: 1; }
+
+.cat-head{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1.5px solid var(--navy);margin-bottom:20px}
+.cat-head .icon{width:36px;height:36px;flex-shrink:0;background:var(--gold-light);border:1px solid rgba(214,155,50,.2);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.95rem}
+.cat-head h2{font-size:1.15rem;margin-bottom:2px}
+.cat-head p{color:var(--text-secondary);font-size:.8rem;line-height:1.4}
+.cat-head .count{margin-left:auto;font-size:.68rem;font-weight:600;color:var(--text-secondary);background:var(--bg-main);border:1px solid var(--border-light);border-radius:var(--radius);padding:4px 9px;white-space:nowrap}
+
+/* Product Grid - Desktop */
+.sub-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Product Cards - Compact */
+.sub-item{
+  position: relative;
+  height: 100px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background-color: var(--bg-surface);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.sub-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+.sub-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(23, 43, 70, 0.9) 0%, rgba(23, 43, 70, 0.4) 40%, transparent 100%);
+  z-index: 1;
+}
+.sub-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border-color: var(--gold);
+}
+.sub-item:hover::before { transform: scale(1.06); }
+.sub-item .txt { position: relative; z-index: 2; width: 100%; }
+.sub-item .txt strong {
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  display: block;
+  margin-bottom: 1px;
+  line-height: 1.2;
+}
+.sub-item .txt span {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.65rem;
+  display: block;
+  line-height: 1.2;
+}
+.sub-item .arrow {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.7rem;
+  z-index: 2;
+  transition: all 0.25s ease;
+}
+.sub-item:hover .arrow { color: var(--gold); transform: translateX(3px); }
+
+.no-result{display:none;text-align:center;color:var(--text-secondary);padding:30px;font-size:.85rem}
+
+/* Footer */
+footer{background:var(--navy);color:rgba(255,255,255,.7);padding:40px 8% 24px;font-size:.85rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:30px}
+.footer-col h4{color:#fff;font-weight:600;margin-bottom:14px;font-size:.95rem}
+.footer-col p{margin-bottom:14px;line-height:1.7}
+.footer-col a{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.7);text-decoration:none;margin-bottom:9px;transition:all .2s;font-size:.85rem}
+.footer-col a:hover{color:var(--gold);transform:translateX(3px)}
+.footer-col a i{width:16px;color:var(--gold);font-size:.75rem}
+.social-links{display:flex;gap:8px;margin-top:14px}
+.social-links a{width:30px;height:30px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;transition:all .25s;margin:0}
+.social-links a:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:translateY(-2px)}
+.social-links a i{width:auto;color:inherit;font-size:.85rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;text-align:center;font-size:.75rem;color:rgba(255,255,255,.4)}
+
+/* --- MOBILE RESPONSIVENESS & HORIZONTAL SCROLL --- */
+@media(max-width: 900px){
+  .nav-links, .mega{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .top-bar{flex-direction:column;gap:4px;text-align:center;font-size:.7rem}
+  .sub-grid{
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  .sub-grid::-webkit-scrollbar { display: none; }
+  .sub-grid { -ms-overflow-style: none; scrollbar-width: none; }
+  .sub-item {
+    flex: 0 0 130px;
+    height: 90px;
+    scroll-snap-align: start;
+  }
+  .sub-item .txt strong { font-size: 0.72rem; }
+  .sub-item .txt span { font-size: 0.6rem; }
+}
+
+@media(max-width: 600px){
+  .footer-grid{grid-template-columns:1fr}
+  .search{min-width:100%}
+  .cat-block{padding:18px}
+  .cat-head{flex-wrap:wrap}
+  .cat-head .count{margin-left:48px;margin-top:4px}
+  .cat-head h2{font-size:1.05rem}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span><i class="fas fa-map-marker-alt"></i> P.O Box 43138, Nairobi, 00100, Kenya</span>
+  <span><i class="fas fa-phone"></i> +254 701 018405 &nbsp;|&nbsp; <i class="fas fa-envelope"></i> info@bdengineers.co.ke</span>
+</div>
+
+<nav>
+  <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-cog"></i></div>BD ENGINEERS</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li>
+      <a href="products.html">Products <i class="fas fa-caret-down caret"></i></a>
+      <div class="mega">
+        <div class="mega-cats">
+          <a href="#tea">Tea Processing</a>
+          <a href="#power">Power Transmission</a>
+          <a href="#solar">Solar Products</a>
+          <a href="#diesel">Diesel Engines &amp; Pumps</a>
+          <a href="#packing">Tea Packing</a>
+        </div>
+        <div class="mega-col">
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Axial Flow Fans</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>CFM Machines</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Heater</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Leaf Feeder</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Pre Sorter</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Vibro Screen Sorter</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Accura CTC</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Withering Troughs</a>
+        </div>
+        <div class="mega-col">
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Centrifugal Fan</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>CTC Segments</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Dryer</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Tea Crusher</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Mid Ball Breaker</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Workshop Machines</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>HRS Gyrovane</a>
+          <a href="#tea"><i class="fas fa-chevron-right"></i>Overhead Monorail Conveyor</a>
+        </div>
+      </div>
+    </li>
+    <li><a href="index.html#industries">Industries</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="btn btn-gold">Get Quote</a>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><i class="fas fa-chevron-right"></i><span>Our Products</span>
+    </div>
+    <h1>Our Products</h1>
+    <p>A complete catalogue of tea processing, power transmission, solar and industrial equipment.</p>
+    <div class="toolbar">
+      <label class="search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search motors, pulleys...">
+      </label>
+      <div class="pills">
+        <a href="#tea" class="pill">Tea Processing</a>
+        <a href="#power" class="pill">Power Transmission</a>
+        <a href="#solar" class="pill">Solar</a>
+        <a href="#diesel" class="pill">Diesel</a>
+        <a href="#packing" class="pill">Tea Packing</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="catalog">
+  <div class="container">
+
+    <!-- TEA PROCESSING -->
+    <div class="cat-block" id="tea" style="--section-bg: var(--img-tea)">
+      <div class="cat-head">
+        <div class="icon"><i class="fas fa-leaf"></i></div>
+        <div><h2>Tea Processing</h2><p>End-to-end machinery for CTC and orthodox tea factories.</p></div>
+        <div class="count">16 items</div>
+      </div>
+      <div class="sub-grid">
+        <a href="#" class="sub-item" style="--bg-img: var(--img-axial)"><div class="txt"><strong>Axial Flow Fans</strong><span>Withering airflow</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-axial)"><div class="txt"><strong>Centrifugal Fan</strong><span>High-pressure drying</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>CFM Machines</strong><span>Continuous fermentation</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Heater</strong><span>Drying heat source</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-axial)"><div class="txt"><strong>Dryer</strong><span>Fluid bed tea dryer</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Leaf Feeder</strong><span>Uniform withering feed</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Pre Sorter</strong><span>Coarse leaf separation</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Vibro Screen Sorter</strong><span>Fine grade sizing</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Accura CTC</strong><span>Rolling &amp; cutting</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>CTC Segments</strong><span>Replaceable rollers</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Tea Crusher</strong><span>Leaf conditioning</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Mid Ball Breaker</strong><span>Granule processing</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-1)"><div class="txt"><strong>Workshop Machines</strong><span>Factory maintenance</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>HRS Gyrovane</strong><span>Orthodox rolling</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-axial)"><div class="txt"><strong>Monorail Conveyor</strong><span>Leaf transport</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Withering Troughs</strong><span>Withering floors</span></div><i class="fas fa-arrow-right arrow"></i></a>
+      </div>
+    </div>
+
+    <!-- POWER TRANSMISSION -->
+    <div class="cat-block" id="power" style="--section-bg: var(--img-1)">
+      <div class="cat-head">
+        <div class="icon"><i class="fas fa-cogs"></i></div>
+        <div><h2>Power Transmission</h2><p>Motors, drives and components that keep production lines moving.</p></div>
+        <div class="count">10 items</div>
+      </div>
+      <div class="sub-grid">
+        <a href="#" class="sub-item" style="--bg-img: var(--img-3)"><div class="txt"><strong>Electric Motors</strong><span>AC induction range</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="pulleys.html" class="sub-item" style="--bg-img: var(--img-1)"><div class="txt"><strong>Pulleys</strong><span>V-belt, taper &amp; pilot</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-1)"><div class="txt"><strong>Taper Lock Bushes</strong><span>Shaft mounting</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-1)"><div class="txt"><strong>Couplings</strong><span>Flexible &amp; rigid</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-1)"><div class="txt"><strong>Worm Gearboxes</strong><span>Speed reduction</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-1)"><div class="txt"><strong>Sprockets</strong><span>Chain drive</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-1)"><div class="txt"><strong>Chains</strong><span>Roller &amp; conveyor</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-axial)"><div class="txt"><strong>Conveyor Belts</strong><span>Material handling</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-1)"><div class="txt"><strong>Vee Belts</strong><span>Sections A, B, C</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-3)"><div class="txt"><strong>Geared Motors</strong><span>Worm gear units</span></div><i class="fas fa-arrow-right arrow"></i></a>
+      </div>
+    </div>
+
+    <!-- SOLAR -->
+    <div class="cat-block" id="solar" style="--section-bg: var(--img-3)">
+      <div class="cat-head">
+        <div class="icon"><i class="fas fa-sun"></i></div>
+        <div><h2>Solar Products</h2><p>Sustainable lighting and power for industrial and municipal use.</p></div>
+        <div class="count">3 items</div>
+      </div>
+      <div class="sub-grid">
+        <a href="#" class="sub-item" style="--bg-img: var(--img-3)"><div class="txt"><strong>Solar Street Lights</strong><span>PV lighting systems</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-3)"><div class="txt"><strong>Solar Lanterns</strong><span>Almika PV lanterns</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-3)"><div class="txt"><strong>Eldora 220 Modules</strong><span>VSPL PV modules</span></div><i class="fas fa-arrow-right arrow"></i></a>
+      </div>
+    </div>
+
+    <!-- DIESEL -->
+    <div class="cat-block" id="diesel" style="--section-bg: var(--img-3)">
+      <div class="cat-head">
+        <div class="icon"><i class="fas fa-gas-pump"></i></div>
+        <div><h2>Diesel Engines &amp; Pumps</h2><p>Factory-assembled pumpsets for water and heavy-duty operations.</p></div>
+        <div class="count">3 items</div>
+      </div>
+      <div class="sub-grid">
+        <a href="#" class="sub-item" style="--bg-img: var(--img-3)"><div class="txt"><strong>Diesel Engines</strong><span>LHP pumpsets</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-3)"><div class="txt"><strong>Centrifugal Pumps</strong><span>Clean water &amp; fluids</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-3)"><div class="txt"><strong>Submersible Pumps</strong><span>Borehole &amp; sump</span></div><i class="fas fa-arrow-right arrow"></i></a>
+      </div>
+    </div>
+
+    <!-- TEA PACKING -->
+    <div class="cat-block" id="packing" style="--section-bg: var(--img-tea)">
+      <div class="cat-head">
+        <div class="icon"><i class="fas fa-box-open"></i></div>
+        <div><h2>Tea Packing</h2><p>Automated bagging and sealing for finished tea.</p></div>
+        <div class="count">2 items</div>
+      </div>
+      <div class="sub-grid">
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Tea Bag Machines</strong><span>Automated packing</span></div><i class="fas fa-arrow-right arrow"></i></a>
+        <a href="#" class="sub-item" style="--bg-img: var(--img-tea)"><div class="txt"><strong>Hot Jaw Sealer</strong><span>150mm crimp sealing</span></div><i class="fas fa-arrow-right arrow"></i></a>
+      </div>
+    </div>
+
+    <div class="no-result" id="noResult"><i class="fas fa-magnifying-glass-minus" style="margin-right:6px"></i> No products match your search.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>BD ENGINEERS LTD</h4>
+        <p>Your trusted partner for industrial machinery, power transmission, and engineering solutions in East Africa.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/254701018405"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a>
+        <a href="products.html"><i class="fas fa-chevron-right"></i> Products</a>
+        <a href="index.html#industries"><i class="fas fa-chevron-right"></i> Industries</a>
+        <a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="#tea"><i class="fas fa-cog"></i> Tea Processing</a>
+        <a href="pulleys.html"><i class="fas fa-cog"></i> Power Transmission</a>
+        <a href="#diesel"><i class="fas fa-cog"></i> Diesel Engines</a>
+        <a href="#solar"><i class="fas fa-cog"></i> Solar Products</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <a href="#"><i class="fas fa-map-marker-alt"></i> P.O Box 43138, Nairobi, 00100</a>
+        <a href="tel:+254701018405"><i class="fas fa-phone"></i> +254 701 018405</a>
+        <a href="tel:+25420552871"><i class="fas fa-phone-alt"></i> +254 20 552871/2</a>
+        <a href="mailto:info@bdengineers.co.ke"><i class="fas fa-envelope"></i> info@bdengineers.co.ke</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 BD Engineers Limited. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+const input=document.getElementById('searchInput');
+const items=document.querySelectorAll('.sub-item');
+const blocks=document.querySelectorAll('.cat-block');
+const noResult=document.getElementById('noResult');
+input.addEventListener('input',()=>{
+  const q=input.value.trim().toLowerCase();
+  let any=false;
+  items.forEach(it=>{
+    const match=it.textContent.toLowerCase().includes(q);
+    it.style.display=match?'':'none';
+    if(match)any=true;
+  });
+  blocks.forEach(b=>{
+    const visible=[...b.querySelectorAll('.sub-item')].some(i=>i.style.display!=='none');
+    b.style.display=visible?'':'none';
+  });
+  noResult.style.display=(q&&!any)?'block':'none';
+});
+const pills=document.querySelectorAll('.pill');
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    pills.forEach(p=>p.classList.toggle('active',p.getAttribute('href')==='#'+e.target.id));
+  }});
+},{rootMargin:'-40% 0px -55% 0px'});
+blocks.forEach(b=>obs.observe(b));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',ev=>{
+  const t=document.querySelector(a.getAttribute('href'));
+  if(t){ev.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+}));
+</script>
+</body>
+</html>

@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD Engineers Ltd | Industrial & Power Transmission Solutions Kenya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            /* Exact Match with pulleys.html Reference */
+            --navy: #172B46;
+            --gold: #D69B32;
+            --gold-light: #FDF6E3;
+            --bg-main: #FAFAF8;      /* Very light warm gray */
+            --bg-surface: #FFFFFF;   /* Pure white */
+            --text-primary: #1A202C; /* Dark charcoal */
+            --text-secondary: #4A5568; /* Medium gray */
+            --border-light: #E2E8F0;
+            --radius: 4px;           /* Flush, clean, industrial rounding */
+
+            /* ===== BD ENGINEERS CLOUDINARY ASSETS ===== */
+            --img-tea:    url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794828569/KTDA-Tea-Factory-Inside_u76a28.jpg');
+            --img-axial:  url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg');
+            --img-1:      url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg');
+            --img-3:      url('https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg');
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-main);
+            font-weight: 400;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- Typography & Utilities --- */
+        h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.5px; color: var(--navy); }
+        .section-padding { padding: 80px 8%; position: relative; }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* Flush, Clean Buttons (Matching Reference but with 4px radius) */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-gold {
+            background: var(--gold);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(214, 155, 50, 0.3);
+        }
+        .btn-gold:hover {
+            background: #c48d2a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(214, 155, 50, 0.4);
+        }
+        .btn-outline {
+            border: 2px solid var(--navy);
+            color: var(--navy);
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: var(--navy);
+            color: #fff;
+        }
+
+        /* --- Top Bar & Nav (Exact Match) --- */
+        .top-bar {
+            background: var(--navy);
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
+            padding: 10px 8%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .top-bar i { margin-right: 6px; color: var(--gold); }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--navy);
+            letter-spacing: 0.5px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--navy);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* --- Hero --- */
+        .hero {
+            height: 85vh;
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            color: #fff;
+        }
+        .hero-carousel {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+        }
+        .hero-slide {
+            position: absolute;
+            width: 100%; height: 100%;
+            background-size: contain;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            transform: scale(1.05);
+        }
+        .hero-slide.active {
+            opacity: 1;
+            animation: parallaxZoom 8s ease-in-out;
+        }
+        @keyframes parallaxZoom {
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .hero-slide:nth-child(1) {
+            background: linear-gradient(rgba(23, 43, 70, 0.7), rgba(23, 43, 70, 0.85)), var(--img-tea);
+        }
+        .hero-slide:nth-child(2) {
+            background: linear-gradient(rgba(23, 43, 70, 0.7), rgba(23, 43, 70, 0.85)), var(--img-axial);
+        }
+        .hero-slide:nth-child(3) {
+            background: linear-gradient(rgba(23, 43, 70, 0.7), rgba(23, 43, 70, 0.85)), var(--img-1);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 300;
+            color: #fff;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            max-width: 550px;
+        }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-buttons .btn-outline {
+            border-color: rgba(255,255,255,0.4);
+            color: #fff;
+        }
+        .hero-buttons .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        /* --- Product Showcase --- */
+        .product-showcase {
+            background: var(--bg-main);
+            padding: 60px 0;
+            overflow: hidden;
+            position: relative;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 8%;
+        }
+        .showcase-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .showcase-header i {
+            color: var(--gold);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
+        }
+
+        .showcase-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .showcase-wrapper::before, .showcase-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .showcase-wrapper::before { left: 0; background: linear-gradient(to right, var(--bg-main), transparent); }
+        .showcase-wrapper::after { right: 0; background: linear-gradient(to left, var(--bg-main), transparent); }
+
+        .showcase-track {
+            display: flex;
+            gap: 24px;
+            animation: scroll 40s linear infinite;
+            width: max-content;
+        }
+        .showcase-track:hover { animation-play-state: paused; }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .showcase-item {
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+        .showcase-item:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .showcase-item:hover img { transform: scale(1.08); }
+
+        .showcase-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 16px;
+            background: linear-gradient(transparent, rgba(23, 43, 70, 0.95));
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .showcase-label i {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+            color: var(--gold);
+        }
+        .showcase-item:hover .showcase-label i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Suppliers Carousel --- */
+        .suppliers-section {
+            background: var(--bg-surface);
+            padding: 50px 0;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .suppliers-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 8%;
+        }
+        .suppliers-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .suppliers-track {
+            display: flex;
+            gap: 60px;
+            animation: scrollSuppliers 35s linear infinite;
+            width: max-content;
+            align-items: center;
+        }
+        .suppliers-track:hover { animation-play-state: paused; }
+        @keyframes scrollSuppliers {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .supplier-item {
+            flex-shrink: 0;
+            width: 160px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            transition: all 0.3s;
+        }
+        .supplier-item:hover {
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+        .supplier-item span {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .supplier-item:hover span { color: var(--navy); }
+
+        /* --- About Section --- */
+        .about-section {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-surface);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .about-slider {
+            position: relative;
+            height: 480px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+        .about-slide {
+            position: absolute;
+            width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        .about-slide.active { opacity: 1; }
+        .about-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+        .about-slide-content {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(23,43,70,0.95));
+            color: #fff;
+        }
+        .about-slide-content h4 { font-size: 1.2rem; margin-bottom: 8px; color: var(--gold); font-weight: 600; }
+        .about-slide-content p { font-size: 0.9rem; color: rgba(255,255,255,0.9); }
+
+        .about-text h2 { font-size: 2.2rem; margin-bottom: 24px; color: var(--navy); }
+        .about-text p { color: var(--text-secondary); margin-bottom: 20px; font-size: 1rem; }
+
+        .about-indicators { display: flex; gap: 8px; margin-top: 24px; }
+        .about-indicator {
+            width: 40px; height: 4px;
+            background: var(--border-light);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .about-indicator.active { background: var(--gold); width: 60px; }
+
+        /* --- Products Section --- */
+        .products-section {
+            position: relative;
+            background: var(--bg-main);
+        }
+        .products-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .products-header h2 { font-size: 2.2rem; margin-bottom: 16px; }
+        .products-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+        .products-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+        }
+        .product-list { list-style: none; border-top: 1px solid var(--border-light); }
+        .product-item {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .product-item:hover, .product-item.active {
+            padding-left: 16px;
+            background: rgba(214, 155, 50, 0.04);
+        }
+        .product-item.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+        .product-item h3 { font-size: 1.1rem; font-weight: 600; transition: transform 0.3s; }
+        .product-item:hover h3 { transform: translateX(8px); }
+        .product-item span { font-size: 1.5rem; transition: transform 0.3s; }
+        .product-item.active span { transform: rotate(45deg); color: var(--gold); }
+
+        .product-display {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 480px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+        .product-display img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s, transform 0.5s; }
+
+        .product-display-info {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            border-top: 1px solid var(--border-light);
+        }
+        .product-display-info h3 { font-size: 1.4rem; margin-bottom: 8px; font-weight: 600; color: var(--navy); }
+        .product-display-info p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* --- Industries Section --- */
+        .industries-section { background: var(--bg-surface); }
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .industry-item {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            padding: 30px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            transition: all 0.3s;
+        }
+        .industry-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .industry-num { font-size: 2.5rem; font-weight: 300; color: var(--gold); line-height: 1; }
+        .industry-text h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--navy); font-weight: 600; }
+        .industry-text p { color: var(--text-secondary); font-size: 0.9rem; }
+
+        /* --- FAQ Section --- */
+        .faq-section {
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            border-top: 1px solid var(--border-light);
+        }
+        .faq-header { text-align: center; margin-bottom: 40px; }
+        .faq-header h2 { font-size: 2.2rem; margin-bottom: 16px; }
+        .faq-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+        .faq-container { max-width: 1000px; margin: 0 auto; }
+        .faq-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .faq-tab {
+            padding: 16px 20px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .faq-tab:hover { border-color: var(--gold); }
+        .faq-tab.active {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy);
+        }
+        .faq-content {
+            background: var(--bg-main);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 40px;
+            min-height: 180px;
+        }
+        .faq-answer { display: none; animation: fadeIn 0.5s ease; }
+        .faq-answer.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .faq-answer h3 { font-size: 1.3rem; margin-bottom: 16px; color: var(--navy); font-weight: 600; }
+        .faq-answer p { color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            text-align: center;
+            padding: 100px 8%;
+            background: var(--bg-main);
+            border-top: 1px solid var(--border-light);
+        }
+        .cta-section h2 { font-size: 2.2rem; margin-bottom: 20px; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        /* --- Footer (Exact Match Structure) --- */
+        footer {
+            background: var(--navy);
+            color: rgba(255,255,255,0.7);
+            padding: 60px 8% 30px;
+            font-size: 0.9rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 { color: #fff; font-weight: 600; margin-bottom: 20px; font-size: 1rem; }
+        .footer-col p { margin-bottom: 20px; line-height: 1.8; }
+        .footer-col a {
+            display: flex; align-items: center; gap: 8px;
+            color: rgba(255,255,255,0.7); text-decoration: none; margin-bottom: 12px; transition: all 0.2s;
+        }
+        .footer-col a:hover { color: var(--gold); transform: translateX(4px); }
+        .footer-col a i { width: 20px; color: var(--gold); font-size: 0.85rem; }
+
+        .social-links { display: flex; gap: 12px; margin-top: 20px; }
+        .social-links a {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: translateY(-4px); }
+        .social-links a i { width: auto; color: inherit; font-size: 1rem; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px; text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .section-padding { padding: 60px 5%; }
+            .about-grid, .products-layout, .industries-grid, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero { height: auto; min-height: 80vh; padding: 120px 5% 80px; }
+            .hero h1 { font-size: 2.5rem; }
+            .product-display { height: 350px; }
+            .about-slider { height: 350px; }
+            .showcase-item { width: 160px; height: 160px; }
+            .faq-tabs { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+            .top-bar { font-size: 0.7rem; padding: 8px 5%; flex-direction: column; gap: 4px; text-align: center; }
+        }
+        @media (max-width: 600px) {
+            .faq-tabs { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span><i class="fas fa-map-marker-alt"></i> P.O Box 43138, Nairobi, 00100, Kenya</span>
+        <span><i class="fas fa-phone"></i> +254 701 018405 &nbsp;|&nbsp; <i class="fas fa-envelope"></i> info@bdengineers.co.ke</span>
+    </div>
+
+    <!-- Navigation (Exact Match with pulleys.html) -->
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><i class="fas fa-cog"></i></div>
+            BD ENGINEERS
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="#industries">Industries</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-gold" style="padding: 10px 24px; font-size: 0.85rem;">Get Quote</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-carousel">
+            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Engineering Solutions for Industry.</h1>
+            <p>Reliable machinery, power transmission equipment, and industrial solutions for businesses across Kenya and East Africa.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-gold">Explore Products <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn btn-outline">Request Quotation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase (Linked to pulleys.html) -->
+    <div class="product-showcase">
+        <div class="showcase-header">
+            <h3>Our Product Range <i class="fas fa-arrow-right"></i> Hover to pause, click to explore</h3>
+        </div>
+        <div class="showcase-wrapper">
+            <div class="showcase-track">
+                <!-- Set 1 -->
+                <a href="pulleys.html" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Pulleys">
+                    <div class="showcase-label">Pulleys <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#power" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg" alt="Electric Motors">
+                    <div class="showcase-label">Electric Motors <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#tea" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg" alt="Conveyor Belts">
+                    <div class="showcase-label">Conveyor Belts <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#power" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Sprockets">
+                    <div class="showcase-label">Sprockets <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#solar" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg" alt="Solar Products">
+                    <div class="showcase-label">Solar Products <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#diesel" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794828569/KTDA-Tea-Factory-Inside_u76a28.jpg" alt="Diesel Pumps">
+                    <div class="showcase-label">Diesel Pumps <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <!-- Set 2 (Exact Duplicate for Seamless Loop) -->
+                <a href="pulleys.html" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Pulleys">
+                    <div class="showcase-label">Pulleys <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#power" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg" alt="Electric Motors">
+                    <div class="showcase-label">Electric Motors <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#tea" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg" alt="Conveyor Belts">
+                    <div class="showcase-label">Conveyor Belts <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#power" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Sprockets">
+                    <div class="showcase-label">Sprockets <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#solar" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg" alt="Solar Products">
+                    <div class="showcase-label">Solar Products <i class="fas fa-arrow-right"></i></div>
+                </a>
+                <a href="products.html#diesel" class="showcase-item">
+                    <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794828569/KTDA-Tea-Factory-Inside_u76a28.jpg" alt="Diesel Pumps">
+                    <div class="showcase-label">Diesel Pumps <i class="fas fa-arrow-right"></i></div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suppliers Carousel -->
+    <div class="suppliers-section">
+        <div class="suppliers-header">
+            <h3>Trusted Global Suppliers & Partners</h3>
+        </div>
+        <div class="showcase-wrapper">
+            <div class="suppliers-track">
+                <div class="supplier-item"><span>LHP Diesel</span></div>
+                <div class="supplier-item"><span>Almika Solar</span></div>
+                <div class="supplier-item"><span>Accura CTC</span></div>
+                <div class="supplier-item"><span>VSPL Modules</span></div>
+                <div class="supplier-item"><span>Global Power Transmission</span></div>
+                <div class="supplier-item"><span>Kenya Industrial Partners</span></div>
+                <!-- Duplicate -->
+                <div class="supplier-item"><span>LHP Diesel</span></div>
+                <div class="supplier-item"><span>Almika Solar</span></div>
+                <div class="supplier-item"><span>Accura CTC</span></div>
+                <div class="supplier-item"><span>VSPL Modules</span></div>
+                <div class="supplier-item"><span>Global Power Transmission</span></div>
+                <div class="supplier-item"><span>Kenya Industrial Partners</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section-padding about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Decades of Industrial Expertise</h2>
+                    <p>BD Engineers Ltd has been a cornerstone of Kenya's industrial sector, providing high-quality machinery and technical support. We bridge the gap between global manufacturing standards and local industrial needs.</p>
+                    <p>From Accura CTC tea processing machinery to heavy-duty LHP diesel pumpsets and power transmission components, our catalog is curated for reliability, efficiency, and longevity.</p>
+                    <a href="#" class="btn btn-gold" style="margin-top: 20px;">Our Story <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="about-slider" id="aboutSlider">
+                    <div class="about-slide active">
+                        <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794828569/KTDA-Tea-Factory-Inside_u76a28.jpg" alt="Tea Processing">
+                        <div class="about-slide-content">
+                            <h4>Tea Processing Excellence</h4>
+                            <p>Complete Accura CTC machinery solutions for tea factories across East Africa.</p>
+                        </div>
+                    </div>
+                    <div class="about-slide">
+                        <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Industrial Components">
+                        <div class="about-slide-content">
+                            <h4>Power Transmission</h4>
+                            <p>High-grade motors, sprockets, taper bushes, and gearboxes for industrial applications.</p>
+                        </div>
+                    </div>
+                    <div class="about-slide">
+                        <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg" alt="Diesel Engines">
+                        <div class="about-slide-content">
+                            <h4>Heavy-Duty Solutions</h4>
+                            <p>Robust LHP diesel engines and centrifugal monoblock pumps for demanding operations.</p>
+                        </div>
+                    </div>
+                    <div class="about-slide">
+                        <img src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg" alt="Solar Solutions">
+                        <div class="about-slide-content">
+                            <h4>Renewable Energy</h4>
+                            <p>Almika solar lanterns and VSPL photovoltaic modules for sustainable industrial projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-indicators">
+                <div class="about-indicator active" data-slide="0"></div>
+                <div class="about-indicator" data-slide="1"></div>
+                <div class="about-indicator" data-slide="2"></div>
+                <div class="about-indicator" data-slide="3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section (Linked to pulleys.html) -->
+    <section class="section-padding products-section" id="products">
+        <div class="container">
+            <div class="products-header">
+                <h2>Our Capabilities</h2>
+                <p>We supply and service a comprehensive range of industrial equipment. Select a category to explore our machinery.</p>
+            </div>
+            <div class="products-layout">
+                <ul class="product-list">
+                    <li class="product-item" data-img="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794828569/KTDA-Tea-Factory-Inside_u76a28.jpg" data-title="Tea Processing Machinery" data-desc="Accura CTC machines, CFM processors, dryers, feeders, and sorters for optimal tea production.">
+                        <h3>Tea Processing</h3> <span>+</span>
+                    </li>
+                    <!-- Assigned to pulleys.html -->
+                    <li class="product-item active" data-img="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" data-title="Power Transmission" data-desc="Sprockets, pulleys, chains, conveyor belts, vee belts, taper bushes, hubs, and couplings." onclick="window.location.href='pulleys.html'">
+                        <h3>Power Transmission</h3> <span>+</span>
+                    </li>
+                    <li class="product-item" data-img="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images_e7idqi.jpg" data-title="Diesel Engines & Pumps" data-desc="LHP factory-assembled diesel pumpsets and centrifugal monoblock pumps for heavy-duty applications.">
+                        <h3>Diesel Engines & Pumps</h3> <span>+</span>
+                    </li>
+                    <li class="product-item" data-img="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-axial_mhzwkj.jpg" data-title="Solar Products" data-desc="Almika solar powered lanterns, Eldora 220 VSPL photovoltaic modules, and solar street lighting.">
+                        <h3>Solar Products</h3> <span>+</span>
+                    </li>
+                    <li class="product-item" data-img="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794828569/KTDA-Tea-Factory-Inside_u76a28.jpg" data-title="Tea Packing Equipment" data-desc="Compact 150mm hot jaw sealers and automated tea bag machines for efficient packaging.">
+                        <h3>Tea Packing</h3> <span>+</span>
+                    </li>
+                </ul>
+                <div class="product-display">
+                    <img id="display-img" src="https://res.cloudinary.com/dzyxm0rhg/image/upload/v1794829025/images-1_uhsjqg.jpg" alt="Product">
+                    <div class="product-display-info">
+                        <h3 id="display-title">Power Transmission</h3>
+                        <p id="display-desc">Sprockets, pulleys, chains, conveyor belts, vee belts, taper bushes, hubs, and couplings. <a href="pulleys.html" style="color: var(--gold); text-decoration: underline; margin-left: 8px; font-weight: 600;">View Pulleys Detail</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="section-padding industries-section" id="industries">
+        <div class="container">
+            <div class="products-header">
+                <h2>Industries We Serve</h2>
+                <p>Providing tailored engineering solutions across Kenya's core economic sectors.</p>
+            </div>
+            <div class="industries-grid">
+                <div class="industry-item">
+                    <div class="industry-num">01</div>
+                    <div class="industry-text">
+                        <h3>Agriculture & Tea Processing</h3>
+                        <p>End-to-end machinery for tea factories, from withering troughs to final packing lines.</p>
+                    </div>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-num">02</div>
+                    <div class="industry-text">
+                        <h3>Manufacturing & Production</h3>
+                        <p>Power transmission components and motors keeping production lines moving efficiently.</p>
+                    </div>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-num">03</div>
+                    <div class="industry-text">
+                        <h3>Construction & Infrastructure</h3>
+                        <p>Heavy-duty LHP diesel pumps and engines for water management and site operations.</p>
+                    </div>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-num">04</div>
+                    <div class="industry-text">
+                        <h3>Renewable Energy</h3>
+                        <p>Commercial and industrial solar lighting solutions for off-grid and municipal projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section-padding faq-section" id="faq">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions about our products and services</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-tabs">
+                    <div class="faq-tab active" data-faq="0">Product Quality</div>
+                    <div class="faq-tab" data-faq="1">Delivery & Installation</div>
+                    <div class="faq-tab" data-faq="2">Technical Support</div>
+                    <div class="faq-tab" data-faq="3">Warranty & Service</div>
+                    <div class="faq-tab" data-faq="4">Payment Terms</div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer active">
+                        <h3>How do you ensure product quality?</h3>
+                        <p>All our machinery and components, from Accura CTC machines to LHP pumpsets, undergo rigorous quality control checks. We source directly from certified global manufacturers and conduct pre-delivery inspections to ensure every product meets international industrial standards.</p>
+                    </div>
+                    <div class="faq-answer">
+                        <h3>Do you provide delivery and installation?</h3>
+                        <p>Yes, we offer comprehensive delivery services across Kenya and East Africa. Our installation team provides on-site setup, alignment, and operator training to ensure your equipment runs optimally from day one. We handle everything from logistics to commissioning.</p>
+                    </div>
+                    <div class="faq-answer">
+                        <h3>What technical support do you offer?</h3>
+                        <p>We provide dedicated technical support via phone and WhatsApp. Our engineers can troubleshoot issues remotely and dispatch technicians for on-site repairs when needed. We also offer preventive maintenance contracts to minimize downtime.</p>
+                    </div>
+                    <div class="faq-answer">
+                        <h3>What is your warranty policy?</h3>
+                        <p>All our products come with manufacturer warranty covering defects in materials and workmanship. Warranty periods vary by product category. We also offer extended warranty options and genuine spare parts supply throughout the equipment lifecycle.</p>
+                    </div>
+                    <div class="faq-answer">
+                        <h3>What are your payment terms?</h3>
+                        <p>We offer flexible payment terms including bank transfer and M-Pesa. Standard terms are a deposit with balance upon delivery. For established clients and government contracts, we offer structured credit facilities. Contact our sales team for customized solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Ready to optimize your operations?</h2>
+            <p>Get in touch with our technical team to discuss your machinery requirements or request a detailed quotation.</p>
+            <a href="tel:+254701018405" class="btn btn-gold">Request a Quotation <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer (Exact Match Structure) -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>BD ENGINEERS LTD</h4>
+                    <p>Your trusted partner for industrial machinery, power transmission, and engineering solutions in East Africa. Quality equipment, reliable service, technical expertise.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/254701018405"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="#about"><i class="fas fa-chevron-right"></i> About Us</a>
+                    <a href="products.html"><i class="fas fa-chevron-right"></i> Products</a>
+                    <a href="#industries"><i class="fas fa-chevron-right"></i> Industries</a>
+                    <a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <a href="pulleys.html"><i class="fas fa-cog"></i> Power Transmission</a>
+                    <a href="products.html#tea"><i class="fas fa-cog"></i> Tea Processing</a>
+                    <a href="products.html#diesel"><i class="fas fa-cog"></i> Diesel Engines</a>
+                    <a href="products.html#solar"><i class="fas fa-cog"></i> Solar Products</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> P.O Box 43138, Nairobi, 00100</a>
+                    <a href="tel:+254701018405"><i class="fas fa-phone"></i> +254 701 018405</a>
+                    <a href="tel:+25420552871"><i class="fas fa-phone-alt"></i> +254 20 552871/2</a>
+                    <a href="mailto:info@bdengineers.co.ke"><i class="fas fa-envelope"></i> info@bdengineers.co.ke</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 BD Engineers Limited. All Rights Reserved. | Designed with precision for industrial excellence.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hero Carousel
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 6000);
+
+        // About Section Slider (Pauses on Hover)
+        const aboutSlides = document.querySelectorAll('.about-slide');
+        const aboutIndicators = document.querySelectorAll('.about-indicator');
+        let currentAboutSlide = 0;
+        let aboutSliderInterval;
+        let isHovering = false;
+
+        function showAboutSlide(index) {
+            aboutSlides.forEach(slide => slide.classList.remove('active'));
+            aboutIndicators.forEach(indicator => indicator.classList.remove('active'));
+            aboutSlides[index].classList.add('active');
+            aboutIndicators[index].classList.add('active');
+            currentAboutSlide = index;
+        }
+
+        function nextAboutSlide() {
+            if (!isHovering) {
+                currentAboutSlide = (currentAboutSlide + 1) % aboutSlides.length;
+                showAboutSlide(currentAboutSlide);
+            }
+        }
+
+        function startAboutSlider() { aboutSliderInterval = setInterval(nextAboutSlide, 5000); }
+        function stopAboutSlider() { clearInterval(aboutSliderInterval); }
+
+        aboutIndicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                stopAboutSlider();
+                showAboutSlide(index);
+                if (!isHovering) startAboutSlider();
+            });
+        });
+
+        const aboutSlider = document.getElementById('aboutSlider');
+        aboutSlider.addEventListener('mouseenter', () => { isHovering = true; stopAboutSlider(); });
+        aboutSlider.addEventListener('mouseleave', () => { isHovering = false; startAboutSlider(); });
+        startAboutSlider();
+
+        // Interactive Product List
+        const items = document.querySelectorAll('.product-item');
+        const displayImg = document.getElementById('display-img');
+        const displayTitle = document.getElementById('display-title');
+        const displayDesc = document.getElementById('display-desc');
+
+        items.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                items.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                displayImg.style.opacity = 0;
+                displayImg.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    displayImg.src = item.getAttribute('data-img');
+                    displayTitle.innerText = item.getAttribute('data-title');
+                    displayDesc.innerText = item.getAttribute('data-desc');
+                    displayImg.style.opacity = 1;
+                    displayImg.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+
+        // FAQ Tabs
+        const faqTabs = document.querySelectorAll('.faq-tab');
+        const faqAnswers = document.querySelectorAll('.faq-answer');
+
+        faqTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const faqIndex = tab.getAttribute('data-faq');
+                faqTabs.forEach(t => t.classList.remove('active'));
+                faqAnswers.forEach(a => a.classList.remove('active'));
+                tab.classList.add('active');
+                faqAnswers[faqIndex].classList.add('active');
+            });
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.industry-item, .products-header').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Parallax Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroSlides = document.querySelectorAll('.hero-slide');
+            heroSlides.forEach(slide => {
+                slide.style.transform = `translateY(${scrolled * 0.4}px) scale(${1 + scrolled * 0.0003})`;
+            });
+        });
+    </script>
+</body>
+</html>
